@@ -32,7 +32,7 @@ const UserNavbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/parking-bookings">
+                  <Link className="nav-link" to="/user/parking-bookings">
                     My Bookings
                   </Link>
                 </li>
@@ -42,7 +42,7 @@ const UserNavbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/ride-bookings">
+                  <Link className="nav-link" to="/user/ride-bookings">
                     My Rides
                   </Link>
                 </li>

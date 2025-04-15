@@ -1,5 +1,5 @@
 import ParkingArea from '../models/parking/parkingSpot.model.js';
-import Booking from '../models/parking/parking.booking.model.js';
+import parkBooking from '../models/parking/parking.booking.model.js';
 import QRCode from 'qrcode';
 import Ride from '../models/ride/ride.admin.model.js';
 import rideBooking from '../models/ride/ride.booking.model.js';
@@ -34,7 +34,7 @@ export const bookParkingSlot = async (req, res) => {
     }
 
     
-    const overlappingBookings = await Booking.find({
+    const overlappingBookings = await parkBooking.find({
       parkingArea: parkingAreaId,
       $or: [
         { startTime: { $lt: endTime }, endTime: { $gt: startTime } }
@@ -46,7 +46,7 @@ export const bookParkingSlot = async (req, res) => {
     }
 
    
-    const newBooking = await Booking.create({
+    const newBooking = await parkBooking.create({
       user: userId,
       parkingArea: parkingAreaId,
       startTime,
@@ -93,7 +93,7 @@ export const bookRide = async (req, res) => {
 
     const fare = ride.farePerKm * 5; // You can replace with actual distance logic
 
-    const booking = await RideBooking.create({
+    const booking = await rideBooking.create({
       user: userId,
       ride: rideId,
       pickupLocation,
@@ -107,5 +107,31 @@ export const bookRide = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: 'Ride booking failed', error: err.message });
+  }
+};
+export const getUserBookedRides = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const bookings = await rideBooking.find({ user: userId })
+      .populate('ride') // include ride details
+      .sort({ createdAt: -1 }); // newest first
+
+    res.status(200).json({ bookings });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch user rides', error: error.message });
+  }
+};
+export const getUserParkingBookings = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const bookings = await parkBooking.find({ user: userId })
+      .populate('parkingArea') // include parking area details
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ bookings });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch parking bookings', error: error.message });
   }
 };

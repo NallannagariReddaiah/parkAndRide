@@ -18,6 +18,8 @@ import DefaultNavbar from './Navbar/DefaultNavbar';
 import UserNavbar from './Navbar/UserNavbar';
 import RideAdminNavbar from './Navbar/RideAdminNavbar';
 import ParkingAdminNavbar from './Navbar/ParkingAdminNavbar';
+import ParkingBookings from './components/user/fetchMyParkingBookings';
+import RideBookings from './components/user/fetchMyRideBookings';
 import { useAuth } from './context/authcont';
 import HomePage from './pages/homePage';
 
@@ -50,12 +52,15 @@ function App() {
       <Route path="/parking-admin/login" element={<ParkingAdminLoginForm />} />
       <Route path="/user/parking-slots-by-station" element={<ParkingSlots/>}/>
       <Route path='/user/availabe-rides-by-station' element={<AvailableRides/>}/>
+      <Route path='/user/parking-bookings' element={<ParkingBookings/>}/>
+      <Route path='/user/ride-bookings' element={<RideBookings/>}/>
       <Route path='/ride-admin/add-ride' element={<AdminAddRide/>}/>
       <Route path='/ride-admin/fetch-rides' element={<RidesPage/>}/>
       <Route path='/ride-admin/fetch-ride/:id' element={<RidePage/>}/>
       <Route path='/parking-admin/add-parking-sport' element={<AddParkingArea />}/>
       <Route path='/parking-admin/fetch-parking-areas' element={<ParkingAreas/>}/>
       <Route path='/parking-admin/fetch-parking-area/:id' element={<ParkingAreaPage/>}/>
+
         {/* <Route path="/parking-nearby" element={<NearbyParking />} />
         <Route path="/parking-bookings" element={<ParkingBookings />} />
         <Route path="/rides" element={<Rides />} />
