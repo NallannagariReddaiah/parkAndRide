@@ -9,6 +9,9 @@ import cors from 'cors'
 
 import connectMongoDb from './db/mongoDbConnection.js'
 import authRouter from  './routes/auth.router.js'
+import parkAdminRoute from './routes/parkAdmin.router.js'
+import rideAdminRoute from './routes/rideAdmin.router.js';
+import userRouter from './routes/user.router.js';
 
 dotenv.config({ path: './.env' });
 // cloudinary.config({
@@ -39,6 +42,9 @@ const port=8000
 app.use(cookieParser());
 
 app.use('/api/auth',authRouter);
+app.use('/api/user', userRouter);
+app.use('/api/park-admin',parkAdminRoute );
+app.use('/api/ride-admin',rideAdminRoute);
 
 app.listen(process.env.BACKEND_SERVER_PORT,()=>{
     console.log(`listening to the post with the port number ${process.env.BACKEND_SERVER_PORT}`);

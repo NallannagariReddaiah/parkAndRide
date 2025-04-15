@@ -12,7 +12,7 @@ const RideAdminLoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/parking-admin/login`, formData,{
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/ride-admin/login`, formData,{
         withCredentials:true,
       });
       navigate('/ride-admin/dashboard'); // or wherever you want to take them
