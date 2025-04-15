@@ -1,4 +1,4 @@
-import ParkingArea from '../models/parking/parkingSpot.model';
+import ParkingArea from '../models/parking/parkingSpot.model.js';
 import Booking from '../models/parking/parking.booking.model.js';
 import QRCode from 'qrcode';
 import Ride from '../models/ride/ride.admin.model.js';

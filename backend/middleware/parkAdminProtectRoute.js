@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import adminSchema from '../models/adminModel.js'
+import parkAdminSchema from '../models/parking/parking.admin.model.js';
 
 const adminProtectRoute = async (req,res,next) =>{
     try{
@@ -12,7 +12,7 @@ const adminProtectRoute = async (req,res,next) =>{
         if(decoded.role!='Admin'&&decoded.role!='parkAdmin'){
             return res.status(401).json({ Unauthorized: "it is an unauthorized access" });
         }
-        const admin =await adminSchema.findById(decoded.userId);
+        const admin =await parkAdminSchema.findById(decoded.userId);
         if(!admin){
             return res.status(401).json({ Unauthorized: "it is an unauthorized access" });
         }
